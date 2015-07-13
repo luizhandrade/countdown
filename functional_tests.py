@@ -16,6 +16,10 @@ class NewVisitorTest(unittest.TestCase):
 
 # She notice the title confirming this is the right site.
         self.assertIn('Countdown', self.browser.title)
+
+# At the top of the page there is a big heading
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertEqual("Countdown to the day", header_text)
         self.fail('Finished the test!')
         
 # She sees this is a countdown to a specific date "september"
