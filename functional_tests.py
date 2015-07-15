@@ -1,4 +1,5 @@
 from selenium import webdriver
+import datetime
 import unittest
 
 
@@ -20,9 +21,23 @@ class NewVisitorTest(unittest.TestCase):
 # At the top of the page there is a big heading
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertEqual("Countdown to the day", header_text)
-        self.fail('Finished the test!')
-        
-# She sees this is a countdown to a specific date "september"
 
+# she a smaller heading saying what the time means 
+        header_text = self.browser.find_element_by_tag_name('h2').text
+        self.assertEqual("Time left for 15 september.", header_text)
+        
+# She notice a date in top of the page
+        header_text = self.browser.find_element_by_id('date_arrival').text
+        self.assertEqual("How many days left to 2015/09/15?", header_text)
+
+# Above theres a number 61
+        date_arrival = datetime.datetime(2015, 9, 15)
+        date_start = datetime.datetime(2015, 7, 15)
+        date_holder = date_arrival - date_start
+
+        days_text = self.browser.find_element_by_id('days').text
+        self.assertEqual('61', days_text)
+# She sees how many days are missing 
+        self.fail('Finished the test!')
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
